@@ -1,5 +1,5 @@
 <?php get_header() ?>
 
     hello there!!!
-    
-<?php get_footer(); ?>
+
+<?php get_footer() ?>
