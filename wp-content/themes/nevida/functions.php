@@ -18,6 +18,12 @@ function montheme_register_assets () {
        
 
 //actions 
-add_action('after_setup_theme', 'montheme_supports');
+function montheme_title_separator() {
+   return '|';
+}
 
+
+
+add_action('after_setup_theme', 'montheme_supports');
 add_action('wp_enqueue_scripts', 'montheme_register_assets');
+add_filter('document_title_separator', 'montheme_title_separator');
