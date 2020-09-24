@@ -21,6 +21,7 @@ function montheme_register_assets () {
     wp_enqueue_script('bootstrap');
 
 }
+
        
 //actions 
 function montheme_title_separator() {

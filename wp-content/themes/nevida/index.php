@@ -18,10 +18,15 @@
     <?php endwhile ?>
 
     
-</div>
+</div><br />
 
-<?= next_posts_link(); ?>
-<?= previous_posts_link(); ?>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+      <?= paginate_links(['type' => 'list']); ?>
+  </ul>
+</nav>
+
+
 
 
 <?php else : ?>
