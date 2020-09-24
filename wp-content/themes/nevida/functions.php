@@ -10,7 +10,6 @@ function nevida_supports () {
 
     add_image_size('card-header',350, 215, true );
 
-
 }
 
 function nevida_register_assets () {
@@ -24,7 +23,6 @@ function nevida_register_assets () {
 
 }
 
-       
 function nevida_title_separator() {
     return '|';
 }
@@ -33,6 +31,7 @@ function nevida_menu_class($classes) {
     $classes[] = 'nav-item';
     return $classes;
 }
+
 function nevida_menu_link_class($attrs) {
     $attrs['class'] = 'nav-link';
     return $attrs;
@@ -59,9 +58,23 @@ function nevida_save_sponso($post_id) {
         }
     }
  }
- 
 
+ function nevida_init() {
+     register_taxonomy('bien-être', 'post', [
+        'labels' => [
+            'name' => 'Bien-être',
+            'update_item' => 'Editer bien-être',
+            'search_itmem' => 'Rechercher bien-être',
+            'menu_name' => 'Bien-être',
+        ],   
+            'show_in_rest' => true ,  
+            'hierarchical' => true,
+            'show_admin_column' => true,
+     ]);
+ }
+ 
 //actions 
+add_action('init', 'nevida_init');
 add_action('after_setup_theme', 'nevida_supports');
 add_action('wp_enqueue_scripts', 'nevida_register_assets');
 add_filter('document_title_separator', 'nevida_title_separator');
