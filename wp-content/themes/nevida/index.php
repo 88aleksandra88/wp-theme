@@ -17,7 +17,12 @@
     </div>
     <?php endwhile ?>
 
+    
 </div>
+
+<?= next_posts_link(); ?>
+<?= previous_posts_link(); ?>
+
 
 <?php else : ?>
 <h1>Aucun article</h1>
