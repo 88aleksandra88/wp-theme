@@ -11,7 +11,7 @@
                 <h5 class="card-title"><?php the_title() ?></h5>
                 <h6 class="card-subtitle mb-2 text-muted">                <?php the_terms(get_the_ID(), 'bien-être'); ?></h6>
                 <p class="card-text"><?php the_content() ?></p>
-                <p class="card-text"><?php the_author() ?></p>
+                <p class="card-text">Redigé par <?php the_author() ?></p>
             </div>
         </div>
     </div>
