@@ -1,7 +1,7 @@
 <?php
 
 //declaration function
-function montheme_supports () { 
+function nevida_supports () { 
     add_theme_support('post-thumbnails');
     add_theme_support('title-tag');
     add_theme_support('menus');
@@ -13,7 +13,7 @@ function montheme_supports () {
 
 }
 
-function montheme_register_assets () {
+function nevida_register_assets () {
     wp_register_style('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
     wp_register_script('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.js',['popper', 'jquery'], false, true);
     wp_register_script('popper', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js', [], false, true);
@@ -25,22 +25,47 @@ function montheme_register_assets () {
 }
 
        
-//actions 
-function montheme_title_separator() {
+function nevida_title_separator() {
     return '|';
 }
 
-function montheme_menu_class($classes) {
+function nevida_menu_class($classes) {
     $classes[] = 'nav-item';
     return $classes;
 }
-function montheme_menu_link_class($attrs) {
+function nevida_menu_link_class($attrs) {
     $attrs['class'] = 'nav-link';
     return $attrs;
 }
 
-add_action('after_setup_theme', 'montheme_supports');
-add_action('wp_enqueue_scripts', 'montheme_register_assets');
-add_filter('document_title_separator', 'montheme_title_separator');
-add_filter('nav_menu_css_class', 'montheme_menu_class');
-add_filter('nav_menu_link_attributes', 'montheme_menu_link_class');
+function nevida_add_custom_box() {
+    add_meta_box('nevida_sponso', 'Sponsoring', 'nevida_render_sponso_box', 'post', 'side');
+}
+
+function nevida_render_sponso_box() {
+   ?>
+    <label for="nevidzsponso">Article sponsorisé</label>
+    <input type="checkbox" value="1" name="nevida_sponso"></input>
+    <input type="hidden" value="0" name="nevida_sponso"></input>
+   <?php
+}
+
+function nevida_save_sponso($post_id) {
+    if (array_key_exists('nevida_sponso',$_POST)) {
+        if ($_POST['nevida_sponso'] === '0') {
+            delete_post_meta($post_id, 'nevida_sponso');
+        } else {
+            update_post_meta($post_id, 'nevida_sponso', 1);
+        }
+    }
+ }
+ 
+
+//actions 
+add_action('after_setup_theme', 'nevida_supports');
+add_action('wp_enqueue_scripts', 'nevida_register_assets');
+add_filter('document_title_separator', 'nevida_title_separator');
+add_filter('nav_menu_css_class', 'nevida_menu_class');
+add_filter('nav_menu_link_attributes', 'nevida_menu_link_class');
+add_action('add_meta_boxes', 'nevida_add_custom_box');
+add_action('save_post', 'nevida_save_post');
