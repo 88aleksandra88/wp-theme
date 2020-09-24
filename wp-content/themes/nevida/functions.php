@@ -8,6 +8,8 @@ function montheme_supports () {
     register_nav_menu('header', 'header');
     register_nav_menu('footer', 'footer');
 
+    add_image_size('card-header',350, 215, true );
+
 
 }
 
